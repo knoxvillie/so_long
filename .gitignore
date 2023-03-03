@@ -1,3 +1,4 @@
 a.out
 *.o
 minilibx-linux
+.vscode

@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:23:40 by kfaustin          #+#    #+#             */
-/*   Updated: 2022/11/27 15:39:01 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/03 16:07:16 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"libft.h"
 
 /**
- * The ft_strchr() function locates the first occurrence of c
- * (converted to a char) in the string pointed to by str.
- * The terminating null character is considered to be part of the string;
- * Therefore if c is ‘\0’, the functions locate the terminating ‘\0’
+ * @brief The ft_strchr() function locates the first occurrence of c \
+ *			(converted to a char) in the string pointed to by str. \
+ *			The terminating null character is considered to be part of the string;
+ *			Therefore if c is ‘\0’, the functions locate the terminating ‘\0’
+ *			The functions ft_strchr() return a pointer to the located character c, \
+ *			or NULL if the character does not appear in the string.
  *
- * The functions ft_strchr() return a pointer to the located character c,
- * or NULL if the character does not appear in the string.
-*/
+ * @param str	The buffer
+ * @param c		The ASCII value
+ * @return char *str
+ */
 
 char	*ft_strchr(const char *str, int c)
 {

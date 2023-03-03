@@ -6,12 +6,11 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 09:45:34 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/02 14:58:04 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:39:51 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
-#include <stdio.h>
+#include "../includes/so_long.h"
 
 void	ft_mlx_buffer_null(void *buffer)
 {
@@ -24,23 +23,24 @@ void	ft_mlx_buffer_null(void *buffer)
 
 int	main(int argc, char **argv)
 {
-	t_data	p;
+	t_data	root;
 
 	(void)argc;
-	(void)argv;
-
-	p.mlx_ptr = mlx_init();
-	ft_mlx_buffer_null(p.mlx_ptr);
-	p.win_ptr = mlx_new_window(p.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "WOLFGANG");
-	ft_mlx_buffer_null(p.win_ptr);
-	p.sprite = mlx_xpm_file_to_image(p.mlx_ptr, SPRITE, &p.x, &p.y);
-	ft_mlx_buffer_null(p.sprite);
-	ft_putnbr_fd(p.x, 1);
-	ft_putnbr_fd(p.y, 1);
-	mlx_put_image_to_window(p.mlx_ptr, p.win_ptr, p.sprite, 0, 0);
-	//mlx_loop(p.mlx_ptr);
-	mlx_destroy_window(p.mlx_ptr, p.win_ptr);
-	mlx_destroy_display(p.mlx_ptr);
-	free (p.mlx_ptr);
+	if (argc != 2)
+	{
+		ft_putstr_fd("Invalid map file\n", 1);
+		return (0);
+	}
+	root.mlx_ptr = mlx_init();
+	ft_mlx_buffer_null(root.mlx_ptr);
+	root.win_ptr = mlx_new_window(root.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "WOLFGANG");
+	ft_mlx_buffer_null(root.win_ptr);
+	root.wall = mlx_xpm_file_to_image(root.mlx_ptr, WALL, &root.x, &root.y);
+	ft_mlx_buffer_null(root.wall);
+	root.floor = mlx_xpm_file_to_image(root.mlx_ptr, FLOOR, &root.x, &root.y);
+	mlx_loop(root.mlx_ptr);
+	mlx_destroy_window(root.mlx_ptr, root.win_ptr);
+	mlx_destroy_display(root.mlx_ptr);
+	free (root.mlx_ptr);
 	return (0);
 }
