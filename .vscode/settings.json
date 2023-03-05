@@ -1,7 +1,8 @@
 {
 	"files.associations": {
-		"get_next_line.h": "c",
-		"libft.h": "c",
-		"stdlib.h": "c"
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c"
 	}
 }

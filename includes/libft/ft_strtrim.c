@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:08:57 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/03 16:08:16 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/05 20:10:30 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  *			specified in 'set' removed from the beginning and the end of the string.
  *
  * @param s1	The pointer that can contains 'set'
- * @param set
+ * @param set	The character to be removed from 's1'
  * @return char* str
  */
 
@@ -35,8 +35,30 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j = (ft_strlen(s1) - 1);
 	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
-	while ((*(s1 + i) != '\0') && (ft_strchr(set, *(s1 + j))))
+	while (s1[i] && ft_strchr(set, s1[j]))
 		j--;
 	str = ft_substr(s1, i, ((j - i) + 1));
 	return (str);
 }
+
+/*
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	if (!s1)
+		return (NULL);
+	if (!set)
+
+	i = 0;
+	j = (ft_strlen(s1) - 1);
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i++;
+	while (s1[i] && ft_strchr(set, s1[j]))
+		j--;
+	str = ft_substr(s1, i, ((j - i) + 1));
+	return (str);
+}
+*/

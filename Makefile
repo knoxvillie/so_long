@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+         #
+#    By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/03 10:31:26 by kfaustin          #+#    #+#              #
-#    Updated: 2023/03/03 12:07:23 by kfaustin         ###   ########.fr        #
+#    Updated: 2023/03/05 17:21:17 by kfaustin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,20 +14,20 @@ BINARY	= so_long
 LIBFTA	= libft.a
 GNLA	= get_next_line.a
 MINILBA	= libmlx_Linux.a
-SOLONGA = so_long.a
+SOLONGA	= so_long.a
 
 CC		= cc
 CFLAG	= -Wall -Wextra -Werror
 LIB		= ar rcs
 RM		= rm -f
-MFLAG	= -lX11 -lXext
+MFLAG	= -lXext -lX11
 
 SRCDIR	= ./src/
 SRC		= so_long.c
 OBJ		= $(addprefix $(SRCDIR), $(SRC:.c=.o))
 
 all: libft gnl solong minilibx
-	$(CC) $(CFLAG) $(SOLONGA) $(MFLAG) $(MINILBA) $(LIBFTA) $(GNLA) -o $(BINARY)
+	$(CC) $(CFLAG) $(SOLONGA) $(MINILBA) $(LIBFTA) $(GNLA) -o $(BINARY) $(MFLAG)
 
 libft:
 	make -C ./includes/libft

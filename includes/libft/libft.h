@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:59:41 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/03 10:31:17 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:53:44 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include<stdlib.h>
-# include<unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 // Mandatory Part 1:
 int		ft_isalpha(int c);

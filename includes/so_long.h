@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:17:42 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/03 13:50:22 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:23:18 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct	s_data
 	int		x;
 	int		y;
 	// Map
+	char	**map;
 	int		x_dim;
+	int		y_dim;
 
 }	t_data;
 

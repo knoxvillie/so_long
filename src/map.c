@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/03 14:38:42 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:14:20 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,48 @@
  * @return int
  */
 
-int	ft_line_count(int fd)
+void	read_map(t_data *root, int fd)
 {
-	int		size_x;
+	int		i;
 	char	*line;
+	char	**map;
 
-	size_x = 0;
+	map = (char **)malloc(sizeof(char *) * (root->y_dim + 1));
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
-		{
-			free (line);
 			break ;
-		}
-		size_x++;
+		map[1] = line;
+	}
+}
+
+int	ft_line_count(int fd)
+{
+	int		size;
+	char	*line;
+
+	size = 0;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		size++;
 		free (line);
 	}
-	return (size_x);
+	return (size);
 }
 
 void	load_window(t_data *root, char *map)
 {
 	int		fd;
 	char	**map;
+
 	fd = open(map, O_RDONLY);
-	root->x_dim = ft_line_count(fd);
-	if (root->x_dim < 2)
+	root->y_dim = ft_line_count(fd);
+	if (root->y_dim < 2)
+		;
+	close (fd);
 
 }
