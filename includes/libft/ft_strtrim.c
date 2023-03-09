@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:08:57 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/05 20:10:30 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/06 11:18:02 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	str = ft_substr(s1, i, ((j - i) + 1));
 	return (str);
 }
-
-/*
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	char	*str;
-	int		i;
-	int		j;
-
-	if (!s1)
-		return (NULL);
-	if (!set)
-
-	i = 0;
-	j = (ft_strlen(s1) - 1);
-	while (s1[i] && ft_strchr(set, s1[i]))
-		i++;
-	while (s1[i] && ft_strchr(set, s1[j]))
-		j--;
-	str = ft_substr(s1, i, ((j - i) + 1));
-	return (str);
-}
-*/

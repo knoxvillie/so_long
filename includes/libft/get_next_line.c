@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 12:12:13 by jomirand          #+#    #+#             */
-/*   Updated: 2022/11/25 16:02:26 by kfaustin         ###   ########.fr       */
+/*   Created: 2023/03/06 22:31:26 by kfaustin          #+#    #+#             */
+/*   Updated: 2023/03/06 22:32:06 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static char	*ft_untilnl(int fd, char *stash)
 {

@@ -3,54 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 15:17:42 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/05 18:23:18 by kfaustin         ###   ########.fr       */
+/*   Created: 2023/03/06 21:43:49 by kfaustin          #+#    #+#             */
+/*   Updated: 2023/03/09 23:44:38 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-// lmlx uses to compile the internal sytem minilibx -lmlx -lXext -lX11
-//# include "../minilibx-linux/mlx_init.h"
+// lmlx uses to compile the internal system minilibx -lmlx -lXext -lX11
 # include "../minilibx-linux/mlx.h"
-# include "./get_next_line/get_next_line.h"
-# include "./get_next_line/get_next_line_bonus.h"
 # include "./libft/libft.h"
 
-// Macros
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 800
+// ---- Macros
+# define DIM 64
+# define TITLE "WOLFGANG"
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+// -- Sprites
 # define WALL "./sprites/wall.xpm"
 # define FLOOR "./sprites/floor.xpm"
+# define PLAYER "./sprites/player.xpm"
+# define ENEMY "./sprites/floor.xpm"
 
 // Structs
 typedef	struct s_window
 {
-	unsigned int	width;
-	unsigned int	height;
-	void			*ptr;
+	void	*ptr;
+	int		x;
+	int 	y;
+
 }	t_window;
 
-typedef struct	s_data
+typedef struct	s_root
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	// Window
+	void	*m_ptr;
+	// sprites
 	void	*wall;
 	void	*floor;
-	int		x;
-	int		y;
+	void	*enemy;
+	void	*player;
+	// ABS Position
+	int		abs_x;
+	int		abs_y;
 	// Map
 	char	**map;
-	int		x_dim;
-	int		y_dim;
+	void	*w_ptr;
+	int		x;
+	int 	y;
 
-}	t_data;
+}	t_root;
 
 // Prototype
-
+// - so_long.c
+// - map.c
+char	**read_map(t_root *root, int fd);
+// - destroy.c
+void	ft_destroy_mlx(t_root *root);
+void	ft_free_2d_array(char **ptr);
+void	ft_destroy_root(t_root *root);
+int		ft_line_count(int fd);
+void	ft_load_map(t_root *root);
+void	ft_load_window(t_root *root, char *file);
+// - event.c
+int	ft_key_event(int keycode, t_root *root);
+// - validation.c
+void	*ft_load_image(t_root *root, char *file);
+void	ft_check_image(t_root *root);
+void	ft_validation(t_root *root, char *file_name, const char *extension);
+int		ft_check_fd(char *file);
+void	ft_check_abs_xy(t_root *root, char *file);
+void	ft_check_and_init_mlx(t_root *root);
+void	ft_check_and_init_wind(t_root *root);
+void	ft_check_map_name(char *file_name, const char *extension);
+void	ft_check_valid_map(t_root *root);
+void	ft_check_rectangle_map(t_root *root);
+// - general.c
+void	ft_free_and_close(int fd, char *str);
 
 #endif

@@ -6,33 +6,31 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/05 19:14:20 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/09 22:50:45 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-/**
- * @brief
- *
- * @param fd
- * @return int
- */
-
-void	read_map(t_data *root, int fd)
+char	**read_map(t_root *root, int fd)
 {
 	int		i;
 	char	*line;
 	char	**map;
 
-	map = (char **)malloc(sizeof(char *) * (root->y_dim + 1));
+	i = 0;
+	map = (char **)malloc(sizeof(char *) * (root->abs_y + 1));
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		map[1] = line;
+		map[i++] = ft_strtrim(line, "\n");
+		free (line);
 	}
+	free (line);
+	map[i] = NULL;
+	return (map);
 }
 
 int	ft_line_count(int fd)
@@ -49,18 +47,50 @@ int	ft_line_count(int fd)
 		size++;
 		free (line);
 	}
+	free (line);
 	return (size);
 }
 
-void	load_window(t_data *root, char *map)
+void	ft_load_map(t_root *root)
+{
+	int		i;
+	int		j;
+	char	pixel;
+
+	j = 0;
+	while (j < root->abs_y)
+	{
+		i = 0;
+		while (i < root->abs_x)
+		{
+			pixel = root->map[j][i];
+			if (pixel == '1')
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->wall, root->x, root->y);
+			else if (pixel == '0')
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, root->x, root->y);
+			else if (pixel == 'E')
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->enemy, root->x, root->y);
+			else if (pixel == 'P')
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->player, root->x, root->y);
+			root->x += DIM;
+			i++;
+		}
+		root->x = 0;
+		root->y += DIM;
+		j++;
+	}
+}
+
+void	ft_load_window(t_root *root, char *file)
 {
 	int		fd;
-	char	**map;
 
-	fd = open(map, O_RDONLY);
-	root->y_dim = ft_line_count(fd);
-	if (root->y_dim < 2)
-		;
+	root->x = 0;
+	root->y = 0;
+	fd = ft_check_fd(file);
+	root->map = read_map(root, fd);
+	ft_check_rectangle_map(root);
+	ft_check_valid_map(root);
+	ft_load_map(root);
 	close (fd);
-
 }

@@ -6,41 +6,36 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 09:45:34 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/03 13:39:51 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/09 23:33:11 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_mlx_buffer_null(void *buffer)
+static void	ft_initialize_root(t_root *root)
 {
-	if (buffer == NULL)
-	{
-		free (buffer);
-		exit (0);
-	}
+	root->x = 0;
+	root->y = 0;
+	root->map = NULL;
+	root->wall = (void *)0;
+	root->floor = (void *)0;
+	root->enemy = (void *)0;
+	root->player = (void *)0;
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	root;
+	t_root	root;
+	char	*file;
 
-	(void)argc;
-	if (argc != 2)
+	if (argc == 2)
 	{
-		ft_putstr_fd("Invalid map file\n", 1);
-		return (0);
+		file = argv[1];
+		ft_initialize_root(&root);
+		ft_validation(&root, file, ".ber");
+		ft_load_window(&root, file);
+		mlx_hook(root.m_ptr, KeyPress, KeyPressMask, ft_key_event(), &root);
+		mlx_loop(root.m_ptr);
 	}
-	root.mlx_ptr = mlx_init();
-	ft_mlx_buffer_null(root.mlx_ptr);
-	root.win_ptr = mlx_new_window(root.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "WOLFGANG");
-	ft_mlx_buffer_null(root.win_ptr);
-	root.wall = mlx_xpm_file_to_image(root.mlx_ptr, WALL, &root.x, &root.y);
-	ft_mlx_buffer_null(root.wall);
-	root.floor = mlx_xpm_file_to_image(root.mlx_ptr, FLOOR, &root.x, &root.y);
-	mlx_loop(root.mlx_ptr);
-	mlx_destroy_window(root.mlx_ptr, root.win_ptr);
-	mlx_destroy_display(root.mlx_ptr);
-	free (root.mlx_ptr);
 	return (0);
 }

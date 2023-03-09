@@ -12,7 +12,6 @@
 
 BINARY	= so_long
 LIBFTA	= libft.a
-GNLA	= get_next_line.a
 MINILBA	= libmlx_Linux.a
 SOLONGA	= so_long.a
 
@@ -23,25 +22,18 @@ RM		= rm -f
 MFLAG	= -lXext -lX11
 
 SRCDIR	= ./src/
-SRC		= so_long.c
-OBJ		= $(addprefix $(SRCDIR), $(SRC:.c=.o))
+SRC		= destroy.c event.c general.c map.c so_long.c validation.c
+OBJ		= $(addprefix $(SRCDIR), $(SRC))
 
-all: libft gnl solong minilibx
-	$(CC) $(CFLAG) $(SOLONGA) $(MINILBA) $(LIBFTA) $(GNLA) -o $(BINARY) $(MFLAG)
+all: libft minilibx
+	$(CC) $(CFLAG) $(OBJ) $(MINILBA) $(LIBFTA) -o $(BINARY) $(MFLAG) -g
 
 libft:
 	make -C ./includes/libft
 	mv ./includes/libft/$(LIBFTA) .
 
-gnl:
-	make -C ./includes/get_next_line
-	mv ./includes/get_next_line/$(GNLA) .
-
 minilibx:
 	cp ./minilibx-linux/$(MINILBA) .
-
-solong: $(OBJ)
-	$(LIB) $(SOLONGA) $(OBJ)
 
 clean:
 	make clean -C ./includes/libft
