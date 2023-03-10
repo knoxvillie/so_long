@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 09:45:34 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:33:11 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:12:46 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	ft_initialize_root(t_root *root)
 	root->floor = (void *)0;
 	root->enemy = (void *)0;
 	root->player = (void *)0;
+	root->colect = (void *)0;
 }
 
 int	main(int argc, char **argv)
@@ -34,7 +35,8 @@ int	main(int argc, char **argv)
 		ft_initialize_root(&root);
 		ft_validation(&root, file, ".ber");
 		ft_load_window(&root, file);
-		mlx_hook(root.m_ptr, KeyPress, KeyPressMask, ft_key_event(), &root);
+		mlx_hook(root.w_ptr, 17, 0, ft_close_root, &root);
+		//mlx_hook(root.m_ptr, KeyPress, KeyPressMask, ft_key_event(), &root);
 		mlx_loop(root.m_ptr);
 	}
 	return (0);

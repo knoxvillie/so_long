@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 21:43:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:44:38 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:06:10 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # define WALL "./sprites/wall.xpm"
 # define FLOOR "./sprites/floor.xpm"
 # define PLAYER "./sprites/player.xpm"
-# define ENEMY "./sprites/floor.xpm"
+# define ENEMY "./sprites/enemy.xpm"
+# define COLECT "./sprites/colect.xpm"
 
 // Structs
 typedef	struct s_window
@@ -48,6 +49,7 @@ typedef struct	s_root
 	void	*floor;
 	void	*enemy;
 	void	*player;
+	void	*colect;
 	// ABS Position
 	int		abs_x;
 	int		abs_y;
@@ -60,18 +62,23 @@ typedef struct	s_root
 }	t_root;
 
 // Prototype
-// - so_long.c
+
+// - destroy.c
+void	ft_destroy_mlx(t_root *root, int flag);
+void	ft_free_2d_array(char **ptr);
+void	ft_destroy_root(t_root *root, int flag);
+int		ft_line_count(int fd);
+// - event.c
+int		ft_close_root(t_root *root);
+int		ft_key_event(int keycode, t_root *root);
+void	ft_check_rectangle_map(t_root *root);
+// - general.c
+void	ft_free_and_close(int fd, char *str);
 // - map.c
 char	**read_map(t_root *root, int fd);
-// - destroy.c
-void	ft_destroy_mlx(t_root *root);
-void	ft_free_2d_array(char **ptr);
-void	ft_destroy_root(t_root *root);
-int		ft_line_count(int fd);
 void	ft_load_map(t_root *root);
 void	ft_load_window(t_root *root, char *file);
-// - event.c
-int	ft_key_event(int keycode, t_root *root);
+// - so_long.c
 // - validation.c
 void	*ft_load_image(t_root *root, char *file);
 void	ft_check_image(t_root *root);
@@ -82,8 +89,5 @@ void	ft_check_and_init_mlx(t_root *root);
 void	ft_check_and_init_wind(t_root *root);
 void	ft_check_map_name(char *file_name, const char *extension);
 void	ft_check_valid_map(t_root *root);
-void	ft_check_rectangle_map(t_root *root);
-// - general.c
-void	ft_free_and_close(int fd, char *str);
 
 #endif

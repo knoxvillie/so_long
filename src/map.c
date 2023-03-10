@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/09 22:50:45 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 12:22:34 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	ft_load_map(t_root *root)
 				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->enemy, root->x, root->y);
 			else if (pixel == 'P')
 				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->player, root->x, root->y);
+			else if (pixel == 'C')
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->colect, root->x, root->y);
 			root->x += DIM;
 			i++;
 		}

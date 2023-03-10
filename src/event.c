@@ -6,13 +6,14 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:39:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:44:50 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:05:01 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	ft_key_event(int keycode, t_root *root)
+int	ft_close_root(t_root *root)
 {
-	;
+	ft_destroy_root(root, 0);
+	return (0);
 }

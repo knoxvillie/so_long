@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:08:27 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:36:12 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 13:03:21 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_load_image(t_root *root, char *file)
 		ft_putstr_fd("Error: \"", 2);
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd("\" Failed to load\n", 2);
-		ft_destroy_root(root);
+		ft_destroy_root(root, 1);
 	}
 	return (image);
 }
@@ -42,6 +42,7 @@ void	ft_check_image(t_root *root)
 	root->floor = ft_load_image(root, FLOOR);
 	root->player = ft_load_image(root, PLAYER);
 	root->enemy = ft_load_image(root, ENEMY);
+	root->colect = ft_load_image(root, COLECT);
 }
 
 int	ft_check_fd(char *file)
@@ -68,7 +69,7 @@ void	ft_check_abs_xy(t_root *root, char *file)
 	if (ft_strlen(line) < 3)
 	{
 		ft_putstr_fd("Error: Invalid map x dimension\n", 2);
-		ft_destroy_mlx(root);
+		ft_destroy_mlx(root, 1);
 	}
 	root->abs_x = (int)ft_strlen(line) - 1;
 	free (line);
@@ -76,7 +77,7 @@ void	ft_check_abs_xy(t_root *root, char *file)
 	if (root->abs_y < 2)
 	{
 		ft_putstr_fd("Error: Invalid map y dimension\n", 2);
-		ft_destroy_mlx(root);
+		ft_destroy_mlx(root, 1);
 	}
 	close (fd);
 }
@@ -87,7 +88,7 @@ void	ft_check_and_init_mlx(t_root *root)
 	if (!root->m_ptr)
 	{
 		ft_putstr_fd("Error: Failed to start mlx_ptr\n", 2);
-		ft_destroy_mlx(root);
+		ft_destroy_mlx(root, 1);
 	}
 }
 
@@ -98,7 +99,7 @@ void	ft_check_and_init_wind(t_root *root)
 	{
 		ft_putstr_fd("Error: Failed to start win_ptr\n", 2);
 		mlx_destroy_window(root->m_ptr, root->w_ptr);
-		ft_destroy_mlx(root);
+		ft_destroy_mlx(root, 1);
 	}
 }
 
@@ -138,7 +139,7 @@ void	ft_check_valid_map(t_root *root)
 				|| (((i == 0) || (i == root->abs_x - 1)) && pixel != '1'))
 			{
 				ft_putstr_fd("Error: Invalid map. Not surrounded by walls\n", 2);
-				ft_destroy_root(root);
+				ft_destroy_root(root, 1);
 				exit (1);
 			}
 			i++;
@@ -159,7 +160,7 @@ void	ft_check_rectangle_map(t_root *root)
 		if (len != (int)ft_strlen(root->map[i]))
 		{
 			ft_putstr_fd("Error: Invalid map. Not rectangle\n", 2);
-			ft_destroy_root(root);
+			ft_destroy_root(root, 1);
 			exit (1);
 		}
 	}
