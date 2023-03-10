@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 12:22:34 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 20:59:25 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**read_map(t_root *root, int fd)
 	char	**map;
 
 	i = 0;
-	map = (char **)malloc(sizeof(char *) * (root->abs_y + 1));
+	map = (char **)malloc(sizeof(char *) * (root->column + 1));
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -58,10 +58,10 @@ void	ft_load_map(t_root *root)
 	char	pixel;
 
 	j = 0;
-	while (j < root->abs_y)
+	while (j < root->column)
 	{
 		i = 0;
-		while (i < root->abs_x)
+		while (i < root->line)
 		{
 			pixel = root->map[j][i];
 			if (pixel == '1')
@@ -69,11 +69,15 @@ void	ft_load_map(t_root *root)
 			else if (pixel == '0')
 				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, root->x, root->y);
 			else if (pixel == 'E')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->enemy, root->x, root->y);
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->scape, root->x, root->y);
 			else if (pixel == 'P')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->player, root->x, root->y);
+			{
+				root->p_x = i;
+				root->p_y = j;
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->playerR, root->x, root->y);
+			}
 			else if (pixel == 'C')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->colect, root->x, root->y);
+				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->collect, root->x, root->y);
 			root->x += DIM;
 			i++;
 		}
@@ -93,6 +97,7 @@ void	ft_load_window(t_root *root, char *file)
 	root->map = read_map(root, fd);
 	ft_check_rectangle_map(root);
 	ft_check_valid_map(root);
+	ft_check_map_elements(root);
 	ft_load_map(root);
 	close (fd);
 }

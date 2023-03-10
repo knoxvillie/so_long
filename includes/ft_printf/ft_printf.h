@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 14:48:38 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/03 13:45:34 by kfaustin         ###   ########.fr       */
+/*   Created: 2022/12/01 16:52:59 by kfaustin          #+#    #+#             */
+/*   Updated: 2022/12/05 15:32:06 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
-# define GET_NEXT_LINE_BONUS_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
+# include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-# ifndef MAX_F_OPENED
-#  define MAX_F_OPENED 1024
-# endif
-
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
-void	*ft_calloc(size_t nmemb, size_t size);
-char	*get_next_line(int fd);
+int		ft_printf(const char *str, ...);
+int		ft_printfd(long number);
+int		ft_printfx(unsigned long number, char c);
+int		ft_printfc(char c);
+int		ft_printfs(char *str);
+int		ft_printfu(unsigned int number);
+int		ft_printfp(unsigned long number);
+char	ft_checkspecifier(char xar);
 
 #endif

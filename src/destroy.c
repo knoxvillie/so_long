@@ -26,12 +26,16 @@ void	ft_destroy_root(t_root *root, int flag)
 		mlx_destroy_image(root->m_ptr ,root->wall);
 	if (root->floor)
 		mlx_destroy_image(root->m_ptr ,root->floor);
-	if (root->enemy)
-		mlx_destroy_image(root->m_ptr ,root->enemy);
-	if (root->player)
-		mlx_destroy_image(root->m_ptr ,root->player);
-	if (root->colect)
-		mlx_destroy_image(root->m_ptr ,root->colect);
+	if (root->scape)
+		mlx_destroy_image(root->m_ptr ,root->scape);
+	if (root->playerR)
+		mlx_destroy_image(root->m_ptr ,root->playerR);
+	if (root->playerL)
+		mlx_destroy_image(root->m_ptr ,root->playerL);
+	if (root->playerB)
+		mlx_destroy_image(root->m_ptr ,root->playerB);
+	if (root->collect)
+		mlx_destroy_image(root->m_ptr ,root->collect);
 	mlx_destroy_window(root->m_ptr, root->w_ptr);
 	ft_destroy_mlx(root, flag);
 }

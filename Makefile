@@ -13,7 +13,7 @@
 BINARY	= so_long
 LIBFTA	= libft.a
 MINILBA	= libmlx_Linux.a
-SOLONGA	= so_long.a
+PRINTA	= libftprintf.a
 
 CC		= cc
 CFLAG	= -Wall -Wextra -Werror
@@ -22,11 +22,11 @@ RM		= rm -f
 MFLAG	= -lXext -lX11
 
 SRCDIR	= ./src/
-SRC		= destroy.c event.c general.c map.c so_long.c validation.c
+SRC		= destroy.c event.c general.c map.c move.c so_long.c validation.c
 OBJ		= $(addprefix $(SRCDIR), $(SRC))
 
-all: libft minilibx
-	$(CC) $(CFLAG) $(OBJ) $(MINILBA) $(LIBFTA) -o $(BINARY) $(MFLAG) -g
+all: libft minilibx ftprintf
+	$(CC) $(CFLAG) $(OBJ) $(MINILBA) $(LIBFTA) $(PRINTA) -o $(BINARY) $(MFLAG) -g
 
 libft:
 	make -C ./includes/libft
@@ -35,14 +35,18 @@ libft:
 minilibx:
 	cp ./minilibx-linux/$(MINILBA) .
 
+ftprintf:
+	make -C ./includes/ft_printf
+	mv ./includes/ft_printf/$(PRINTA) .
+
 clean:
 	make clean -C ./includes/libft
-	make clean -C ./includes/get_next_line
+	make clean -C ./includes/ft_print
 	$(RM) ./src/*.o
 
 fclean:
-	$(RM) $(LIBFTA) $(GNLA) $(MINILBA) $(SOLONGA) $(BINARY)
+	$(RM) $(LIBFTA) $(PRINTA) $(MINILBA) $(BINARY)
 	make fclean -C ./includes/libft
-	make fclean -C ./includes/get_next_line
+	make fclean -C ./includes/ft_printf
 
 re: fclean all

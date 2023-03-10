@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:08:27 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 13:03:21 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:30:03 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	ft_check_image(t_root *root)
 {
 	root->wall = ft_load_image(root, WALL);
 	root->floor = ft_load_image(root, FLOOR);
-	root->player = ft_load_image(root, PLAYER);
-	root->enemy = ft_load_image(root, ENEMY);
-	root->colect = ft_load_image(root, COLECT);
+	root->playerR = ft_load_image(root, PLAYERR);
+	root->playerL = ft_load_image(root, PLAYERL);
+	root->playerB = ft_load_image(root, PLAYERB);
+	root->scape = ft_load_image(root, SCAPE);
+	root->collect = ft_load_image(root, COLLECT);
 }
 
 int	ft_check_fd(char *file)
@@ -71,10 +73,10 @@ void	ft_check_abs_xy(t_root *root, char *file)
 		ft_putstr_fd("Error: Invalid map x dimension\n", 2);
 		ft_destroy_mlx(root, 1);
 	}
-	root->abs_x = (int)ft_strlen(line) - 1;
+	root->line = (int)ft_strlen(line) - 1;
 	free (line);
-	root->abs_y = ft_line_count(fd) + 1;
-	if (root->abs_y < 2)
+	root->column = ft_line_count(fd) + 1;
+	if (root->column < 2)
 	{
 		ft_putstr_fd("Error: Invalid map y dimension\n", 2);
 		ft_destroy_mlx(root, 1);
@@ -94,7 +96,7 @@ void	ft_check_and_init_mlx(t_root *root)
 
 void	ft_check_and_init_wind(t_root *root)
 {
-	root->w_ptr = mlx_new_window(root->m_ptr, root->abs_x * DIM, root->abs_y * DIM, TITLE);
+	root->w_ptr = mlx_new_window(root->m_ptr, root->line * DIM, root->column * DIM, TITLE);
 	if (!root->w_ptr)
 	{
 		ft_putstr_fd("Error: Failed to start win_ptr\n", 2);
@@ -129,14 +131,14 @@ void	ft_check_valid_map(t_root *root)
 	char	pixel;
 
 	j = 0;
-	while (j < root->abs_y)
+	while (j < root->column)
 	{
 		i = 0;
-		while (i < root->abs_x)
+		while (i < root->line)
 		{
 			pixel = root->map[j][i];
-			if ((((j == 0) || (j == root->abs_y - 1)) && pixel != '1')
-				|| (((i == 0) || (i == root->abs_x - 1)) && pixel != '1'))
+			if ((((j == 0) || (j == root->column - 1)) && pixel != '1')
+				|| (((i == 0) || (i == root->line - 1)) && pixel != '1'))
 			{
 				ft_putstr_fd("Error: Invalid map. Not surrounded by walls\n", 2);
 				ft_destroy_root(root, 1);
@@ -163,5 +165,25 @@ void	ft_check_rectangle_map(t_root *root)
 			ft_destroy_root(root, 1);
 			exit (1);
 		}
+	}
+}
+
+void	ft_check_map_elements(t_root *root)
+{
+	ft_count_map_elements(root);
+	if (root->start_point != 1)
+	{
+		ft_putstr_fd("Error: Multiples starting positions\n", 2);
+		ft_destroy_root(root, 1);
+	}
+	if (root->exit_point != 1)
+	{
+		ft_putstr_fd("Error: Multiples exits\n", 2);
+		ft_destroy_root(root, 1);
+	}
+	if (root->colec_point < 1)
+	{
+		ft_putstr_fd("Error: Collectible must be at least 1\n", 2);
+		ft_destroy_root(root, 1);
 	}
 }
