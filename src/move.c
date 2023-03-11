@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:36:14 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 14:44:48 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:28:28 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	ft_move_player(t_root *root, int to_x, int to_y)
 	if (!flag)
 		return (0);
 	root->map[root->player_y][root->player_x] = '0';
-	mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, root->player_x * DIM, root->player_y * DIM);
+	mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor,
+		root->player_x * DIM, root->player_y * DIM);
 	root->map[to_y][to_x] = 'P';
 	ft_rotate_player_sprite(root, to_x, to_y);
 	root->player_x = to_x;

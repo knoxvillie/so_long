@@ -22,7 +22,7 @@ RM		= rm -f
 MFLAG	= -lXext -lX11
 
 SRCDIR	= ./src/
-SRC		= destroy.c event.c general.c map.c move.c so_long.c validation.c
+SRC		= destroy.c event.c general.c general_a.c map.c move.c so_long.c validation.c validation_a.c validation_b.c
 OBJ		= $(addprefix $(SRCDIR), $(SRC))
 
 all: libft minilibx ftprintf

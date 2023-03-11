@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 15:18:51 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:01:01 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,29 @@ int	ft_line_count(int fd)
 	return (size);
 }
 
+static void	ft_load_map_aux(t_root *root, int i, int j, char pixel)
+{
+	if (pixel == '1')
+		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
+			root->wall, root->x, root->y);
+	else if (pixel == '0')
+		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
+			root->floor, root->x, root->y);
+	else if (pixel == 'E')
+		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
+			root->scape, root->x, root->y);
+	else if (pixel == 'P')
+	{
+		root->player_x = i;
+		root->player_y = j;
+		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
+			root->playerR, root->x, root->y);
+	}
+	else if (pixel == 'C')
+		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
+			root->collect, root->x, root->y);
+}
+
 void	ft_load_map(t_root *root)
 {
 	int		i;
@@ -64,20 +87,7 @@ void	ft_load_map(t_root *root)
 		while (i < root->line)
 		{
 			pixel = root->map[j][i];
-			if (pixel == '1')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->wall, root->x, root->y);
-			else if (pixel == '0')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, root->x, root->y);
-			else if (pixel == 'E')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->scape, root->x, root->y);
-			else if (pixel == 'P')
-			{
-				root->player_x = i;
-				root->player_y = j;
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->playerR, root->x, root->y);
-			}
-			else if (pixel == 'C')
-				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->collect, root->x, root->y);
+			ft_load_map_aux(root, i, j, pixel);
 			root->x += DIM;
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 21:43:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 16:05:15 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:01:22 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,23 +88,23 @@ typedef struct	s_root
 
 // - destroy.c
 void	ft_destroy_mlx(t_root *root, int flag);
-void	ft_free_2d_array(char **ptr);
 void	ft_destroy_root(t_root *root, int flag);
-int		ft_line_count(int fd);
+void	ft_free_2d_array(char **ptr);
 // - event.c
 int		ft_close_root_event(t_root *root);
 int		ft_key_event(int keycode, t_root *root);
-void	ft_check_rectangle_map(t_root *root);
 // - general.c
-void	ft_free_and_close(int fd, char *str);
-void	ft_count_map_elements(t_root *root);
 void	ft_rotate_player_sprite(t_root *root, int to_x, int to_y);
-char	**ft_dup_2d_array(t_root *root);
 void	ft_flood_fill(t_root *root, int x, int y, char *elements);
-void	ft_print_map(char **map, int x, int y);
+void	ft_count_map_elements(t_root *root);
 void	ft_fill_wall_escape(char **str);
+// - general_a.c
+void	ft_free_and_close(int fd, char *str);
+char	**ft_dup_2d_array(t_root *root);
+void	ft_print_map(char **map, int x, int y);
 // - map.c
 char	**read_map(t_root *root, int fd);
+int		ft_line_count(int fd);
 void	ft_load_map(t_root *root);
 void	ft_load_window(t_root *root, char *file);
 // - move.c
@@ -112,15 +112,19 @@ int		ft_check_valid_move(t_root *root, int to_x, int to_y);
 int		ft_move_player(t_root *root, int to_x, int to_y);
 // - so_long.c
 // - validation.c
+void	ft_validation(t_root *root, char *file_name, const char *extension);
 void	*ft_load_image(t_root *root, char *file);
 void	ft_check_image(t_root *root);
-void	ft_validation(t_root *root, char *file_name, const char *extension);
-int		ft_check_fd(char *file);
-void	ft_check_abs_xy(t_root *root, char *file);
 void	ft_check_and_init_mlx(t_root *root);
 void	ft_check_and_init_wind(t_root *root);
-void	ft_check_map_name(char *file_name, const char *extension);
-void	ft_check_valid_map(t_root *root);
-void	ft_check_map_elements(t_root *root);
+// - validation_a.c
 void	ft_check_valid_path(t_root *root);
+void	ft_check_map_elements(t_root *root);
+void	ft_check_rectangle_map(t_root *root);
+void	ft_check_valid_map(t_root *root);
+void	ft_check_map_name(char *file_name, const char *extension);
+// - validation_b.c
+int		ft_check_fd(char *file);
+void	ft_check_abs_xy(t_root *root, char *file);
+
 #endif

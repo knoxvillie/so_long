@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:39:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 14:45:23 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:31:27 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_close_root_event(t_root *root)
 	return (1);
 }
 
-int		ft_key_event(int keycode, t_root *root)
+int	ft_key_event(int keycode, t_root *root)
 {
 	int	moved;
 
