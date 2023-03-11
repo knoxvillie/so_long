@@ -1,4 +1,5 @@
 a.out
 *.o
-minilibx-lin*
-.vscode
+minilibx-lin*/
+.vscode/
+.idea/

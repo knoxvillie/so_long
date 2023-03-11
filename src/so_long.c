@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 09:45:34 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:27:55 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:54:44 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	ft_initialize_root(t_root *root)
 	root->start_point = 0;
 	root->colec_point = 0;
 	root->exit_point = 0;
+	root->mp = NULL;
 }
 
 int	main(int argc, char **argv)

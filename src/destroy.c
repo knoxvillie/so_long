@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:13:28 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 13:15:35 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:55:06 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_destroy_mlx(t_root *root, int flag)
 void	ft_destroy_root(t_root *root, int flag)
 {
 	ft_free_2d_array(root->map);
+	ft_free_2d_array(root->mp);
 	if (root->wall)
 		mlx_destroy_image(root->m_ptr ,root->wall);
 	if (root->floor)

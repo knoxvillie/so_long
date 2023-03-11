@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:08:27 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:30:03 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 17:00:13 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	*ft_load_image(t_root *root, char *file)
 	image = mlx_xpm_file_to_image(root->m_ptr, file, &root->x, &root->y);
 	if (!image)
 	{
-		ft_putstr_fd("Error: \"", 2);
-		ft_putstr_fd(file, 2);
-		ft_putstr_fd("\" Failed to load\n", 2);
+		ft_putstr_fd("Error\n Failed to load an image\n", 2);
 		ft_destroy_root(root, 1);
 	}
 	return (image);
@@ -55,7 +53,7 @@ int	ft_check_fd(char *file)
 	if (fd < 0)
 	{
 		close (fd);
-		ft_putstr_fd("Error: Invalid file descriptor!\n", 2);
+		ft_putstr_fd("Error\n Invalid file descriptor!\n", 2);
 		exit (1);
 	}
 	return (fd);
@@ -70,7 +68,7 @@ void	ft_check_abs_xy(t_root *root, char *file)
 	line = get_next_line(fd);
 	if (ft_strlen(line) < 3)
 	{
-		ft_putstr_fd("Error: Invalid map x dimension\n", 2);
+		ft_putstr_fd("Error\n Invalid map x dimension\n", 2);
 		ft_destroy_mlx(root, 1);
 	}
 	root->line = (int)ft_strlen(line) - 1;
@@ -78,7 +76,7 @@ void	ft_check_abs_xy(t_root *root, char *file)
 	root->column = ft_line_count(fd) + 1;
 	if (root->column < 2)
 	{
-		ft_putstr_fd("Error: Invalid map y dimension\n", 2);
+		ft_putstr_fd("Error\n Invalid map y dimension\n", 2);
 		ft_destroy_mlx(root, 1);
 	}
 	close (fd);
@@ -89,7 +87,7 @@ void	ft_check_and_init_mlx(t_root *root)
 	root->m_ptr = mlx_init();
 	if (!root->m_ptr)
 	{
-		ft_putstr_fd("Error: Failed to start mlx_ptr\n", 2);
+		ft_putstr_fd("Error\n Failed to start mlx_ptr\n", 2);
 		ft_destroy_mlx(root, 1);
 	}
 }
@@ -99,7 +97,7 @@ void	ft_check_and_init_wind(t_root *root)
 	root->w_ptr = mlx_new_window(root->m_ptr, root->line * DIM, root->column * DIM, TITLE);
 	if (!root->w_ptr)
 	{
-		ft_putstr_fd("Error: Failed to start win_ptr\n", 2);
+		ft_putstr_fd("Error\n Failed to start win_ptr\n", 2);
 		mlx_destroy_window(root->m_ptr, root->w_ptr);
 		ft_destroy_mlx(root, 1);
 	}
@@ -118,7 +116,7 @@ void	ft_check_map_name(char *file, const char *extension)
 	{
 		if (file[--len_file] != extension[--len_ext])
 		{
-			ft_putstr_fd("Error: Invalid map extension.\n", 2);
+			ft_putstr_fd("Error\n Invalid map extension.\n", 2);
 			exit (1);
 		}
 	}
@@ -130,23 +128,21 @@ void	ft_check_valid_map(t_root *root)
 	int		j;
 	char	pixel;
 
-	j = 0;
-	while (j < root->column)
+	j = -1;
+	while (++j < root->column)
 	{
-		i = 0;
-		while (i < root->line)
+		i = -1;
+		while (++i < root->line)
 		{
 			pixel = root->map[j][i];
 			if ((((j == 0) || (j == root->column - 1)) && pixel != '1')
 				|| (((i == 0) || (i == root->line - 1)) && pixel != '1'))
 			{
-				ft_putstr_fd("Error: Invalid map. Not surrounded by walls\n", 2);
+				ft_putstr_fd("Error\n Invalid map. Not surrounded by walls\n", 2);
 				ft_destroy_root(root, 1);
 				exit (1);
 			}
-			i++;
 		}
-		j++;
 	}
 }
 
@@ -161,7 +157,7 @@ void	ft_check_rectangle_map(t_root *root)
 	{
 		if (len != (int)ft_strlen(root->map[i]))
 		{
-			ft_putstr_fd("Error: Invalid map. Not rectangle\n", 2);
+			ft_putstr_fd("Error\n Invalid map. Not rectangle\n", 2);
 			ft_destroy_root(root, 1);
 			exit (1);
 		}
@@ -173,17 +169,40 @@ void	ft_check_map_elements(t_root *root)
 	ft_count_map_elements(root);
 	if (root->start_point != 1)
 	{
-		ft_putstr_fd("Error: Multiples starting positions\n", 2);
+		ft_putstr_fd("Error\n Multiples starting positions\n", 2);
 		ft_destroy_root(root, 1);
 	}
 	if (root->exit_point != 1)
 	{
-		ft_putstr_fd("Error: Multiples exits\n", 2);
+		ft_putstr_fd("Error\n Multiples exits\n", 2);
 		ft_destroy_root(root, 1);
 	}
 	if (root->colec_point < 1)
 	{
-		ft_putstr_fd("Error: Collectible must be at least 1\n", 2);
+		ft_putstr_fd("Error\n Collectible must be at least 1\n", 2);
 		ft_destroy_root(root, 1);
+	}
+}
+
+void	ft_check_valid_path(t_root *root)
+{
+	int	i;
+	int	j;
+
+	root->mp = ft_dup_2d_array(root);
+	root->fill = 'X';
+	ft_flood_fill(root, root->player_x, root->player_y, "P0C");
+	j = -1;
+	while (++j < root->column)
+	{
+		i = -1;
+		while (++i < root->line)
+		{
+			if (root->mp[j][i] != 'W' && root->mp[j][i] != 'X')
+			{
+				ft_putstr_fd("Error\nThe map doesn't have a valid path\n", 2);
+				ft_destroy_root(root, 1);
+			}
+		}
 	}
 }

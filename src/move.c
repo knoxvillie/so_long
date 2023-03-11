@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:36:14 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:55:09 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:44:48 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	ft_move_player(t_root *root, int to_x, int to_y)
 	flag = ft_check_valid_move(root, to_x, to_y);
 	if (!flag)
 		return (0);
-	root->map[root->p_y][root->p_x] = '0';
-	mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, root->p_x * DIM, root->p_y * DIM);
+	root->map[root->player_y][root->player_x] = '0';
+	mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, root->player_x * DIM, root->player_y * DIM);
 	root->map[to_y][to_x] = 'P';
 	ft_rotate_player_sprite(root, to_x, to_y);
-	root->p_x = to_x;
-	root->p_y = to_y;
+	root->player_x = to_x;
+	root->player_y = to_y;
 	return (flag);
 }

@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 20:59:25 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 15:18:51 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	ft_load_map(t_root *root)
 				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->scape, root->x, root->y);
 			else if (pixel == 'P')
 			{
-				root->p_x = i;
-				root->p_y = j;
+				root->player_x = i;
+				root->player_y = j;
 				mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->playerR, root->x, root->y);
 			}
 			else if (pixel == 'C')
@@ -99,5 +99,6 @@ void	ft_load_window(t_root *root, char *file)
 	ft_check_valid_map(root);
 	ft_check_map_elements(root);
 	ft_load_map(root);
+	ft_check_valid_path(root);
 	close (fd);
 }

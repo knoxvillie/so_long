@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:39:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:55:09 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:45:23 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int		ft_key_event(int keycode, t_root *root)
 	if (keycode == ESC)
 		ft_close_root_event(root);
 	else if (keycode == W)
-		moved = ft_move_player(root, root->p_x, root->p_y - 1);
+		moved = ft_move_player(root, root->player_x, root->player_y - 1);
 	else if (keycode == S)
-		moved = ft_move_player(root, root->p_x, root->p_y + 1);
+		moved = ft_move_player(root, root->player_x, root->player_y + 1);
 	else if (keycode == A)
-		moved = ft_move_player(root, root->p_x - 1, root->p_y);
+		moved = ft_move_player(root, root->player_x - 1, root->player_y);
 	else if (keycode == D)
-		moved = ft_move_player(root, root->p_x + 1, root->p_y);
+		moved = ft_move_player(root, root->player_x + 1, root->player_y);
 	if (moved)
 	{
 		ft_printf("Moves: %d\n", ++root->moves);

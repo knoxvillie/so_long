@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 21:43:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:19:24 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/11 16:05:15 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@
 # define SCAPE "./sprites/exit.xpm"
 
 // Structs
+typedef struct	s_pos
+{
+	int		x;
+	int		y;
+}	t_pos;
+
 typedef struct	s_root
 {
 	void	*m_ptr;
@@ -65,13 +71,17 @@ typedef struct	s_root
 	int		x;
 	int 	y;
 	// Player
-	int		p_x;
-	int 	p_y;
+	int		player_x;
+	int 	player_y;
+
 	int 	moves;
 	// Map elements
 	int		start_point;
 	int		colec_point;
 	int 	exit_point;
+	// Flood fill
+	char	**mp;
+	char	fill;
 }	t_root;
 
 // Prototype
@@ -89,6 +99,10 @@ void	ft_check_rectangle_map(t_root *root);
 void	ft_free_and_close(int fd, char *str);
 void	ft_count_map_elements(t_root *root);
 void	ft_rotate_player_sprite(t_root *root, int to_x, int to_y);
+char	**ft_dup_2d_array(t_root *root);
+void	ft_flood_fill(t_root *root, int x, int y, char *elements);
+void	ft_print_map(char **map, int x, int y);
+void	ft_fill_wall_escape(char **str);
 // - map.c
 char	**read_map(t_root *root, int fd);
 void	ft_load_map(t_root *root);
@@ -108,4 +122,5 @@ void	ft_check_and_init_wind(t_root *root);
 void	ft_check_map_name(char *file_name, const char *extension);
 void	ft_check_valid_map(t_root *root);
 void	ft_check_map_elements(t_root *root);
+void	ft_check_valid_path(t_root *root);
 #endif
