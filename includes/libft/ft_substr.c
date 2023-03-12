@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:10:20 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/05 20:08:41 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 21:51:26 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		str[i] = s[start + i];
 		i++;
 	}
-	str[i]  = '\0';
+	str[i] = '\0';
 	return (str);
 }

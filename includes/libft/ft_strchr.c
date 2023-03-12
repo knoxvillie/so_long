@@ -20,9 +20,9 @@
 			return a pointer to the located character 'c', or NULL if the character \
 			does not appear in the string.
  *
- * @param str	The buffer
- * @param c	The ASCII value
- * @return	char *str
+ * @param str The buffer
+ * @param c The ASCII value
+ * @return char *str
  */
 
 char	*ft_strchr(const char *str, int c)
