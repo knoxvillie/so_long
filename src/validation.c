@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:08:27 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 17:43:55 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:55:49 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_validation(t_root *root, char *file, const char *extension)
 	ft_check_map_name(file, extension);
 	ft_check_and_init_mlx(root);
 	ft_check_abs_xy(root, file);
-	ft_check_and_init_wind(root);
 	ft_check_image(root);
 }
 
@@ -38,9 +37,9 @@ void	ft_check_image(t_root *root)
 {
 	root->wall = ft_load_image(root, WALL);
 	root->floor = ft_load_image(root, FLOOR);
-	root->playerR = ft_load_image(root, PLAYERR);
-	root->playerL = ft_load_image(root, PLAYERL);
-	root->playerB = ft_load_image(root, PLAYERB);
+	root->player_r = ft_load_image(root, PLAYERR);
+	root->player_l = ft_load_image(root, PLAYERL);
+	root->player_b = ft_load_image(root, PLAYERB);
 	root->scape = ft_load_image(root, SCAPE);
 	root->collect = ft_load_image(root, COLLECT);
 }
@@ -62,7 +61,6 @@ void	ft_check_and_init_wind(t_root *root)
 	if (!root->w_ptr)
 	{
 		ft_putstr_fd("Error\n Failed to start win_ptr\n", 2);
-		mlx_destroy_window(root->m_ptr, root->w_ptr);
-		ft_destroy_mlx(root, 1);
+		ft_destroy_root(root, 1);
 	}
 }

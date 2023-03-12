@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:34:29 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 17:42:54 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:01:35 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	ft_check_map_elements(t_root *root)
 	ft_count_map_elements(root);
 	if (root->start_point != 1)
 	{
-		ft_putstr_fd("Error\n Multiples starting positions\n", 2);
+		ft_putstr_fd("Error\n The number of starting positions must be 1\n", 2);
 		ft_destroy_root(root, 1);
 	}
 	if (root->exit_point != 1)
 	{
-		ft_putstr_fd("Error\n Multiples exits\n", 2);
+		ft_putstr_fd("Error\n The number of exits must be 1\n", 2);
 		ft_destroy_root(root, 1);
 	}
 	if (root->colec_point < 1)

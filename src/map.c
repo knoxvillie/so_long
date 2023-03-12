@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 18:01:01 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:00:20 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_line_count(int fd)
 	return (size);
 }
 
-static void	ft_load_map_aux(t_root *root, int i, int j, char pixel)
+static void	ft_load_map_aux(t_root *root, char pixel)
 {
 	if (pixel == '1')
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
@@ -63,13 +63,9 @@ static void	ft_load_map_aux(t_root *root, int i, int j, char pixel)
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
 			root->scape, root->x, root->y);
 	else if (pixel == 'P')
-	{
-		root->player_x = i;
-		root->player_y = j;
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
-			root->playerR, root->x, root->y);
-	}
-	else if (pixel == 'C')
+								root->player_r, root->x, root->y);
+	else
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
 			root->collect, root->x, root->y);
 }
@@ -80,20 +76,18 @@ void	ft_load_map(t_root *root)
 	int		j;
 	char	pixel;
 
-	j = 0;
-	while (j < root->column)
+	j = -1;
+	while (++j < root->column)
 	{
-		i = 0;
-		while (i < root->line)
+		i = -1;
+		while (++i < root->line)
 		{
 			pixel = root->map[j][i];
-			ft_load_map_aux(root, i, j, pixel);
+			ft_load_map_aux(root, pixel);
 			root->x += DIM;
-			i++;
 		}
 		root->x = 0;
 		root->y += DIM;
-		j++;
 	}
 }
 
@@ -103,12 +97,13 @@ void	ft_load_window(t_root *root, char *file)
 
 	root->x = 0;
 	root->y = 0;
-	fd = ft_check_fd(file);
+	fd = ft_check_fd(root, file);
 	root->map = read_map(root, fd);
 	ft_check_rectangle_map(root);
 	ft_check_valid_map(root);
 	ft_check_map_elements(root);
-	ft_load_map(root);
 	ft_check_valid_path(root);
+	ft_check_and_init_wind(root);
+	ft_load_map(root);
 	close (fd);
 }

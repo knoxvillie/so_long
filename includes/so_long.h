@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 21:43:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 18:01:22 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 21:17:28 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 # include "../minilibx-linux/mlx.h"
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
-
-// ---- X11/X.h
-# ifndef KeyPress
-#  define KeyPress 2
-# endif
-# ifndef KeyPressMask
-#  define KeyPressMask (1L<<0)
-# endif
 
 // ---- Macros
 # define DIM 64
@@ -45,47 +37,33 @@
 # define SCAPE "./sprites/exit.xpm"
 
 // Structs
-typedef struct	s_pos
-{
-	int		x;
-	int		y;
-}	t_pos;
-
-typedef struct	s_root
+typedef struct s_root
 {
 	void	*m_ptr;
-	// sprites
 	void	*wall;
 	void	*floor;
 	void	*scape;
-	void	*playerR;
-	void	*playerL;
-	void	*playerB;
+	void	*player_r;
+	void	*player_l;
+	void	*player_b;
 	void	*collect;
-	// ABS Position
 	int		line;
 	int		column;
-	// Map
 	char	**map;
 	void	*w_ptr;
 	int		x;
-	int 	y;
-	// Player
+	int		y;
 	int		player_x;
-	int 	player_y;
-
-	int 	moves;
-	// Map elements
+	int		player_y;
+	int		moves;
 	int		start_point;
 	int		colec_point;
-	int 	exit_point;
-	// Flood fill
+	int		exit_point;
 	char	**mp;
 	char	fill;
 }	t_root;
 
 // Prototype
-
 // - destroy.c
 void	ft_destroy_mlx(t_root *root, int flag);
 void	ft_destroy_root(t_root *root, int flag);
@@ -124,7 +102,8 @@ void	ft_check_rectangle_map(t_root *root);
 void	ft_check_valid_map(t_root *root);
 void	ft_check_map_name(char *file_name, const char *extension);
 // - validation_b.c
-int		ft_check_fd(char *file);
+int		ft_check_fd(t_root *root, char *file);
 void	ft_check_abs_xy(t_root *root, char *file);
+void	ft_check_unknown(t_root *root, char pixel);
 
 #endif

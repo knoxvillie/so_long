@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:27:10 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 18:02:43 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:49:12 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	ft_rotate_player_sprite(t_root *root, int to_x, int to_y)
 	if ((root->player_x < to_x) || (root->player_y < to_y))
 	{
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
-			root->playerR, to_x * DIM, to_y * DIM);
+								root->player_r, to_x * DIM, to_y * DIM);
 		return ;
 	}
 	if (root->player_y > to_y)
 	{
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
-			root->playerB, to_x * DIM, to_y * DIM);
+								root->player_b, to_x * DIM, to_y * DIM);
 		return ;
 	}
 	if (root->player_x > to_x)
 	{
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
-			root->playerL, to_x * DIM, to_y * DIM);
+								root->player_l, to_x * DIM, to_y * DIM);
 		return ;
 	}
 }
@@ -53,22 +53,25 @@ void	ft_count_map_elements(t_root *root)
 	int		j;
 	char	pixel;
 
-	j = 0;
-	while (j < root->column)
+	j = -1;
+	while (++j < root->column)
 	{
-		i = 0;
-		while (i < root->line)
+		i = -1;
+		while (++i < root->line)
 		{
 			pixel = root->map[j][i];
+			ft_check_unknown(root, pixel);
 			if (pixel == 'P')
+			{
+				root->player_x = i;
+				root->player_y = j;
 				root->start_point++;
+			}
 			else if (pixel == 'C')
 				root->colec_point++;
 			else if (pixel == 'E')
 				root->exit_point++;
-			i++;
 		}
-		j++;
 	}
 }
 

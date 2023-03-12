@@ -6,13 +6,13 @@
 /*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:34:38 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/11 17:41:21 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/12 21:11:44 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	ft_check_fd(char *file)
+int	ft_check_fd(t_root *root, char *file)
 {
 	int	fd;
 
@@ -20,8 +20,8 @@ int	ft_check_fd(char *file)
 	if (fd < 0)
 	{
 		close (fd);
-		ft_putstr_fd("Error\n Invalid file descriptor!\n", 2);
-		exit (1);
+		ft_putstr_fd("Error\n Invalid fd! File doesn't exit\n", 2);
+		ft_destroy_root(root, 1);
 	}
 	return (fd);
 }
@@ -31,7 +31,7 @@ void	ft_check_abs_xy(t_root *root, char *file)
 	char	*line;
 	int		fd;
 
-	fd = ft_check_fd(file);
+	fd = ft_check_fd(root, file);
 	line = get_next_line(fd);
 	if (ft_strlen(line) < 3)
 	{
@@ -47,4 +47,13 @@ void	ft_check_abs_xy(t_root *root, char *file)
 		ft_destroy_mlx(root, 1);
 	}
 	close (fd);
+}
+
+void	ft_check_unknown(t_root *root, char pixel)
+{
+	if (!ft_strchr("PEC10", pixel))
+	{
+		ft_putstr_fd("Error\n Unknown map element\n", 2);
+		ft_destroy_root(root, 1);
+	}
 }
