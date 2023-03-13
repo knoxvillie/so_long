@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation_a.c                                     :+:      :+:    :+:   */
+/*   validation_bonus_a.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:34:29 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 11:28:48 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:04:03 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	ft_check_valid_path(t_root *root)
 {
