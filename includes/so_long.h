@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 21:43:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:04:23 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:20:34 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // ---- Macros
 # define DIM 64
-# define TITLE "WOLFGANG"
+# define TITLE "so_long"
 # define ESC 65307
 # define W 119
 # define A 97

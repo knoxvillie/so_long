@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kfaustin <kfaustin@student.42porto.com>    +#+  +:+       +#+         #
+#    By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/03 10:31:26 by kfaustin          #+#    #+#              #
-#    Updated: 2023/03/05 17:21:17 by kfaustin         ###   ########.fr        #
+#    Updated: 2023/03/13 13:50:17 by kfaustin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 BINARY	= so_long
+BINARYB	= so_long_bonus
 LIBFTA	= libft.a
 MINILBA	= libmlx_Linux.a
 PRINTA	= libftprintf.a
@@ -21,12 +22,21 @@ LIB		= ar rcs
 RM		= rm -f
 MFLAG	= -lXext -lX11
 
+# Mandatory
 SRCDIR	= ./src/
 SRC		= destroy.c event.c general.c general_a.c map.c move.c so_long.c validation.c validation_a.c validation_b.c
 OBJ		= $(addprefix $(SRCDIR), $(SRC))
+# Bonus
+SRCBDIR	= ./bonus/
+SRCB	= destroy_bonus.c enemy_bonus.c event_bonus.c general_bonus_a.c general_bonus.c map_bonus.c move_bonus.c so_long_bonus.c \
+			validation_bonus_a.c validation_bonus_b.c validation_bonus.c
+BOBJ	= $(addprefix $(SRCBDIR), $(SRCB))
 
 all: libft minilibx ftprintf
 	$(CC) $(CFLAG) $(OBJ) $(MINILBA) $(LIBFTA) $(PRINTA) -o $(BINARY) $(MFLAG) -g
+
+bonus: libft minilibx ftprintf
+	$(CC) $(CFLAG) $(BOBJ) $(MINILBA) $(LIBFTA) $(PRINTA) -o $(BINARYB) $(MFLAG) -g
 
 libft:
 	make -C ./includes/libft

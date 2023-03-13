@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:08:35 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:03:52 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:42:39 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ static void	ft_load_map_aux(t_root *root, char pixel)
 	else if (pixel == 'P')
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
 								root->player_r, root->x, root->y);
-	else
+	else if (pixel == 'C')
 		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
 			root->collect, root->x, root->y);
+	else
+		mlx_put_image_to_window(root->m_ptr, root->w_ptr,
+			root->enemy, root->x, root->y);
 }
 
 void	ft_load_map(t_root *root)

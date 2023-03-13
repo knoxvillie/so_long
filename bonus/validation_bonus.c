@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:08:27 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:04:10 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:06:02 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	ft_check_image(t_root *root)
 	root->player_r = ft_load_image(root, PLAYERR);
 	root->player_l = ft_load_image(root, PLAYERL);
 	root->player_b = ft_load_image(root, PLAYERB);
+	root->enemy = ft_load_image(root, ENEMY);
+	root->enemy_r = ft_load_image(root, ENEMYR);
+	root->enemy_b = ft_load_image(root, ENEMYB);
 	root->scape = ft_load_image(root, SCAPE);
 	root->collect = ft_load_image(root, COLLECT);
 }

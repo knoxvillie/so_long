@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:34:38 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:04:07 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:00:31 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_check_abs_xy(t_root *root, char *file)
 
 void	ft_check_unknown(t_root *root, char pixel)
 {
-	if (!ft_strchr("PEC10", pixel))
+	if (!ft_strchr("PEC10H", pixel))
 	{
 		ft_putstr_fd("Error\n Unknown map element\n", 2);
 		ft_destroy_root(root, 1);

@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   destroy_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kfaustin <kfaustin@student.42porto.>       +#+  +:+       +#+        */
+/*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:13:28 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/12 20:02:20 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:36:38 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	ft_destroy_mlx(t_root *root, int flag)
 {
 	mlx_destroy_display(root->m_ptr);
 	free (root->m_ptr);
 	exit (flag);
+}
+
+void	ft_destroy_enemy(t_root *root)
+{
+		if (root->enemy)
+		mlx_destroy_image(root->m_ptr, root->enemy);
+		if (root->enemy_r)
+		mlx_destroy_image(root->m_ptr, root->enemy_r);
+		if (root->enemy_b)
+		mlx_destroy_image(root->m_ptr, root->enemy_b);
 }
 
 void	ft_destroy_root(t_root *root, int flag)
@@ -29,6 +39,7 @@ void	ft_destroy_root(t_root *root, int flag)
 		mlx_destroy_image(root->m_ptr, root->floor);
 	if (root->scape)
 		mlx_destroy_image(root->m_ptr, root->scape);
+	ft_destroy_enemy(root);
 	if (root->player_r)
 		mlx_destroy_image(root->m_ptr, root->player_r);
 	if (root->player_l)

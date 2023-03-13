@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 17:34:29 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:04:03 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 13:58:10 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check_valid_path(t_root *root)
 
 	root->mp = ft_dup_2d_array(root);
 	root->fill = 'X';
-	ft_flood_fill(root, root->player_x, root->player_y, "P0CE");
+	ft_flood_fill(root, root->player_x, root->player_y, "P0CEH");
 	j = -1;
 	while (++j < root->column)
 	{

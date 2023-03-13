@@ -6,7 +6,7 @@
 /*   By: kfaustin <kfaustin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:39:49 by kfaustin          #+#    #+#             */
-/*   Updated: 2023/03/13 12:03:40 by kfaustin         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:36:32 by kfaustin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,16 @@ int	ft_key_event(int keycode, t_root *root)
 			ft_close_root_event(root);
 	}
 	return (moved);
+}
+
+int	ft_event_frames(t_root *root)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	str = ft_itoa(root->moves);
+	mlx_put_image_to_window(root->m_ptr, root->w_ptr, root->floor, DIM, 0);
+	mlx_string_put(root->m_ptr, root->w_ptr, DIM / 2, DIM / 4, 0xFFFFFF, str);
+
 }
