@@ -1,0 +1,5 @@
+a.out
+*.o
+minilibx-lin*/
+.vscode/
+.idea/
