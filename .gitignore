@@ -1,6 +1,5 @@
 a.out
 *.o
-minilibx-lin*/
 .vscode/
 .idea/
 so_long/
