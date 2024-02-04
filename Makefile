@@ -16,23 +16,23 @@ LIBFTA	= libft.a
 MINILBA	= libmlx_Linux.a
 PRINTA	= libftprintf.a
 
-CC		= cc
+CC	= cc
 CFLAG	= -Wall -Wextra -Werror
-LIB		= ar rcs
-RM		= rm -f
+LIB	= ar rcs
+RM	= rm -f
 MFLAG	= -lXext -lX11
 
 # Mandatory
 SRCDIR	= ./src/
-SRC		= destroy.c event.c general.c general_a.c map.c move.c so_long.c validation.c validation_a.c validation_b.c
-OBJ		= $(addprefix $(SRCDIR), $(SRC))
+SRC	= destroy.c event.c general.c general_a.c map.c move.c so_long.c validation.c validation_a.c validation_b.c
+OBJ	= $(addprefix $(SRCDIR), $(SRC))
 # Bonus
 SRCBDIR	= ./bonus/
 SRCB	= destroy_bonus.c enemy_bonus.c event_bonus.c general_bonus_a.c general_bonus.c map_bonus.c move_bonus.c so_long_bonus.c \
 			validation_bonus_a.c validation_bonus_b.c validation_bonus.c
 BOBJ	= $(addprefix $(SRCBDIR), $(SRCB))
 
-all: libft minilibx ftprintf
+all: libft minilibx ftprintf bonus
 	$(CC) $(CFLAG) $(OBJ) $(MINILBA) $(LIBFTA) $(PRINTA) -o $(BINARY) $(MFLAG) -g
 
 bonus: libft minilibx ftprintf
@@ -43,13 +43,15 @@ libft:
 	mv ./includes/libft/$(LIBFTA) .
 
 minilibx:
-	cp ./minilibx-linux/$(MINILBA) .
+	make -C ./minilibx-linux
+	mv ./minilibx-linux/$(MINILBA) .
 
 ftprintf:
 	make -C ./includes/ft_printf
 	mv ./includes/ft_printf/$(PRINTA) .
 
 clean:
+	make clean -C ./minilibx-linux
 	make clean -C ./includes/libft
 	make clean -C ./includes/ft_printf
 
@@ -57,4 +59,4 @@ fclean: clean
 	$(RM) $(LIBFTA) $(PRINTA) $(MINILBA) $(BINARY)
 	$(RM) $(BINARY) $(BINARYB)
 
-re: fclean all
+re: fclean all bonus libft minilibx ftprintf 
